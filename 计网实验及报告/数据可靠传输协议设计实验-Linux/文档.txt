@@ -1,0 +1,2 @@
+实验各阶段的可执行文件以及检验程序在文件夹/bin中
+根据CMakeLists在linux上使用cmake编译
