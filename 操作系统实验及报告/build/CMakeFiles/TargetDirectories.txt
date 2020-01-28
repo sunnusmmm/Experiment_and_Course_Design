@@ -1,0 +1,2 @@
+C:/ubuntn/Operate_System/build/CMakeFiles/edit_cache.dir
+C:/ubuntn/Operate_System/build/CMakeFiles/rebuild_cache.dir
