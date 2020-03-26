@@ -1,5 +1,5 @@
 # Experiment_and_Course_Design
-大三实验及课设
+华科实验及课设
 
 ## MIPS-CPU_LOGISIM_NHY
 
