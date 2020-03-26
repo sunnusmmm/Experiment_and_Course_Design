@@ -1,0 +1,4 @@
+IDM_FILE_EXIT	equ 10001
+IDM_Action_Recommendation	equ 10101
+IDM_Action_LIST	equ 10102
+IDM_HELP_ABOUT	equ 11001
