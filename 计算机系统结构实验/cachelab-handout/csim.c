@@ -164,20 +164,17 @@ void replayTrace(char *trace_fn) {
     int testcount = 0;
 
     while (fscanf(trace_fp, " %c %llx,%d", buf, &addr, &len) > 0) {
-        if (verbosity && buf[0] != 'I')
-            printf("%c %llx,%d ", buf[0], addr, len);
+        if (verbosity && buf[0] != 'I') printf("%c %llx,%d ", buf[0], addr, len);
         switch (buf[0]) {
-            case 'I':
-                break;
             case 'L':
             case 'S':
                 accessData(addr);
-                ++testcount;
+                testcount++;
                 break;
             case 'M':
                 accessData(addr);
                 accessData(addr);
-                ++testcount;
+                testcount++;
                 break;
             default:
                 break;
