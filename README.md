@@ -1,19 +1,21 @@
 # Experiment_and_Course_Design
-### 华科实验及课设
+<img src="C:\Users\Administrator\Pictures\Saved Pictures\hust.jpg" alt="hust" style="zoom: 25%;" />
 
-|           实验           |                 Experiment                 |
-| :----------------------: | :----------------------------------------: |
-|       操作系统实验       |      [Operating system experiment][1]      |
-|       操作系统课设       |      [Operating system curriculum][8]      |
-|     数据库实验及报告     |          [Database experiment][9]          |
-|         数电实验         |          [Digital experiment][2]           |
-|         汇编实验         |        [Compilation experiment][3]         |
-|      组原实验及报告      |           [Group experiment][4]            |
-|         组原课设         |     [Group original course design][7]      |
-|    编译原理实验及报告    |   [Compilation principle experiment][10]   |
-|      计算机基础实验      |       [Computer Basic Experiment][5]       |
-|      计网实验及报告      |         [Net count experiment][6]          |
-| 计算机系统结构实验及报告 | [Computer system structure experiment][11] |
+### 华科实验及课设🎉📒🌲🛠📍🤖️☁️☕️📁🔥
+
+| 实验                      | Experiment                                 |
+| :------------------------ | :----------------------------------------- |
+| 💾操作系统实验             | [Operating system experiment][1]           |
+| ✒操作系统课设             | [Operating system curriculum][8]           |
+| 🔧数据库实验及报告         | [Database experiment][9]                   |
+| 🎮数电实验                 | [Digital experiment][2]                    |
+| 🍕汇编实验                 | [Compilation experiment][3]                |
+| 📵组原实验及报告           | [Group experiment][4]                      |
+| 💻组原课设                 | [Group original course design][7]          |
+| 🚀编译原理实验及报告       | [Compilation principle experiment][10]     |
+| 🐛计算机基础实验           | [Computer Basic Experiment][5]             |
+| 💪计网实验及报告           | [Net count experiment][6]                  |
+| 🥚计算机系统结构实验及报告 | [Computer system structure experiment][11] |
 
 ## MIPS-CPU_LOGISIM_NHY
 
