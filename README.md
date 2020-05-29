@@ -1,5 +1,5 @@
 # Experiment_and_Course_Design
-<img src="C:\Users\Administrator\Pictures\Saved Pictures\hust.jpg" alt="hust" style="zoom: 25%;" />
+<img src="C:\Users\Administrator\Pictures\Saved Pictures\hust.jpg" style="zoom: 25%;" />
 
 ### 华科实验及课设🎉📒🌲🛠📍🤖️☁️☕️📁🔥
 
