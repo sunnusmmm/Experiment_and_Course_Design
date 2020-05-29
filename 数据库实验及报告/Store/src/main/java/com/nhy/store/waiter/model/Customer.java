@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.List;
 
+@Entity
 @Table(name = "T_CUSTOMER")
 @Data
 @EqualsAndHashCode(callSuper = true)
