@@ -4,8 +4,8 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
-@Entity
 @Table(name = "T_CUSTOMER")
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -15,6 +15,9 @@ import javax.persistence.Table;
 @Builder
 public class Customer extends BaseEntity {
     private String name;
+    private int age;
     private String tel;
-    private boolean isMemebr;
+    private String membership;
+    private String password;
+    private boolean admin;
 }

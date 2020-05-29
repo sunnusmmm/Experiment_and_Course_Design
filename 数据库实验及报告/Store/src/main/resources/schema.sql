@@ -6,8 +6,11 @@ create table t_coffee (
     id bigint auto_increment,
     create_time timestamp,
     update_time timestamp,
-    name varchar(255),
-    price bigint,
+    type varchar(25),
+    name varchar(25),
+    price double,
+    discount double,
+    description varchar(255),
     primary key (id)
 );
 

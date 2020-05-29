@@ -8,5 +8,7 @@ import java.util.List;
 public interface CommodityRepository extends JpaRepository<Commodity, Long> {
     List<Commodity> findByNameInOrderById(List<String> list);
 
-    Commodity findByName(String name);
+    List<Commodity> findByTypeOrderById(String type);
+
+    List<Commodity> findByNameLike(String name);
 }
