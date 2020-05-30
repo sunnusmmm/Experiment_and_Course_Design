@@ -2,6 +2,7 @@ package com.nhy.store.waiter.controller;
 
 import com.nhy.store.waiter.model.Commodity;
 import com.nhy.store.waiter.service.CommodityService;
+import com.nhy.store.waiter.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,13 +19,20 @@ public class CommodityController {
     public ModelAndView getAll() {
         List<Commodity> list = commodityService.getAllCommodity();
         ModelAndView view = new ModelAndView("Commodity");
-        view.addObject("commodityList",list);
+        view.addObject("uid", Util.getCurrentUser().getUsername());
+        view.addObject("name", Util.getCurrentUser().getPassword());
+        view.addObject("commodityList", list);
         return view;
     }
 
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-    public List<Commodity> getByName(@PathVariable String name) {
-        return commodityService.findCommodityLike(name);
+    public ModelAndView getByName(@PathVariable String name) {
+        List<Commodity> list = commodityService.findCommodityLike(name);
+        ModelAndView view = new ModelAndView("Commodity");
+        view.addObject("uid", Util.getCurrentUser().getUsername());
+        view.addObject("name", Util.getCurrentUser().getPassword());
+        view.addObject("commodityList", list);
+        return view;
     }
 
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
