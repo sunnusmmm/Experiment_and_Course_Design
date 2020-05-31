@@ -5,6 +5,7 @@ insert into t_coffee (name, type , price, discount, description, create_time, up
 insert into t_coffee (name, type , price, discount, description, create_time, update_time) values ('ruler', 'Tool', 3000, 9, 'desp5' , now(), now());
 
 insert into t_user (username, password) values ('Mike','123');
+insert into t_user (username, password) values ('NHY','321');
 
 -- insert into t_user_roles (rolename) values ('admin');
 -- insert into t_user_roles (rolename) values ('customer');

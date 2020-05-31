@@ -1,6 +1,6 @@
 package com.nhy.store.waiter.config;
 
-import com.nhy.store.waiter.service.UserService;
+import com.nhy.store.waiter.service.UserServiceDetil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     UserDetailsService userService() {
-        return new UserService();
+        return new UserServiceDetil();
     }
 
     @Override
@@ -40,6 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/goods")
                 .permitAll().and()
                 .logout()
+//                .logoutUrl("/logout")
+//                .deleteCookies("JSESSIONID")
                 .permitAll();
     }
 }

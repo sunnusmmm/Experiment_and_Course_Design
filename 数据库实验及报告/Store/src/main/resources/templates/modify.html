@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body class="container"
+      style='background-color:#fffacd;background-size: 100% 450%;background-repeat: no-repeat;height: 100%'>
+<form th:action="@{/goods/update/}+${id}" method="POST" >
+    <input type="hidden" name="id" th:value="${id}">
+    类别：<br>
+    <input type="text" name="type" th:value="${type}">
+    <br>
+    名称：<br>
+    <input type="text" name="name" th:value="${name}">
+    <br>
+    售价：<br>
+    <input type="text" name="price" th:value="${price}">
+    <br>
+    折扣：<br>
+    <input type="text" name="discount" th:value="${discount}">
+    <br>
+    简介：<br>
+    <input type="text" name="description" th:value="${description}">
+    <br>
+    <input type="submit" value="提交" >
+</form>
+</body>

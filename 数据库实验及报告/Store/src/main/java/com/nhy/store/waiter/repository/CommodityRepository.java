@@ -11,4 +11,6 @@ public interface CommodityRepository extends JpaRepository<Commodity, Long> {
     List<Commodity> findByTypeOrderById(String type);
 
     List<Commodity> findByNameLike(String name);
+
+    List<Commodity> findByIdIn(List<Integer> ids);
 }

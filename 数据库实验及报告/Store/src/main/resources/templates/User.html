@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>个人信息</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<h2 align="center">个人信息表</h2>
+<p th:text="${user.getId()}"></p>
+<p th:text="${user.getUsername()}"></p>
+<p th:text="${user.getPassword()}"></p>
+<a th:href="@{/logout}">注销</a>
+<table style="border: 1px;margin: 0 auto;background: snow" width="50%" cellpadding="5" cellspacing="0">
+    <tr>
+        <td style="background: salmon">姓名</td>
+        <td><input type="text" style="width:95%"></td>
+        <td>性别</td>
+        <td><select style="width: 96%">
+            <option>男</option>
+            <option>女</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>手机号码</td>
+        <td><input type="tel" style="width:95%"></td>
+        <td>电子邮箱</td>
+        <td><input type="email" style="width:95%"></td>
+    </tr>
+    <tr>
+        <td>教育程度</td>
+        <td><input style="width: 95%; " type="text"></td>
+        <td>工作职位</td>
+        <td><input style="width: 95%; " type="text"></td>
+    </tr>
+    <tr>
+        <td>工作城市</td>
+        <td><input style="width: 95%; " type="text"></td>
+        <td>期望工资</td>
+        <td><input style="width: 95%; " type="text"></td>
+    </tr>
+    <tr>
+        <td>自我介绍</td>
+        <td colspan="3"><input type="text" style="width: 98%; "></td>
+    </tr>
+    <tr>
+        <td>特长</td>
+        <td colspan="3"><input type="text" style="width: 98%; "></td>
+    </tr>
+    <tr>
+        <td>家庭住址</td>
+        <td colspan="3"><input type="text" style="width: 98%; "></td>
+    </tr>
+    <tr>
+        <td colspan="4" align="right">
+            <input type="submit" value="提交">
+            <input type="reset" value="退出">
+        </td>
+    </tr>
+</table>
+</body>
+</html>

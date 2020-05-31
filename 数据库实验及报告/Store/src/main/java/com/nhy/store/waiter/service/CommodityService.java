@@ -45,8 +45,16 @@ public class CommodityService {
         return true;
     }
 
-    public boolean deleteCommodity(Commodity commodity) {
-        commodityRepository.delete(commodity);
+    public Optional<Commodity> getCommodityById(Long id) {
+        return commodityRepository.findById(id);
+    }
+
+    public List<Commodity> getAllById(List<Integer> ids){
+        return commodityRepository.findByIdIn(ids);
+    }
+
+    public boolean deleteCommodity(Long Id) {
+        commodityRepository.deleteById(Id);
         return true;
     }
 }
