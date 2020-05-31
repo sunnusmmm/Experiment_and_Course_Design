@@ -31,7 +31,7 @@ public class User implements UserDetails {
     static Logger log = LoggerFactory.getLogger(User.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
     @Column(name = "username")
     String userName;
     @Column(name = "password")

@@ -29,4 +29,9 @@ public class UserServiceDetil implements UserDetailsService {
         log.info("userPass===>" + user.getPassword());
         return user;
     }
+
+    public boolean regUser(User user){
+        userRepository.save(user);
+        return true;
+    }
 }
