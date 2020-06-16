@@ -64,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findByCid(int cid, Pageable pageable) {
         //查找出所有二级分类
-        List<Classification> sec = classificationDao.findByParentId(cid);
+        List<Classification> sec = classificationDao.findById(cid);
         List<Integer> secIds = new ArrayList<>();
         for (Classification classification : sec) {
             secIds.add(classification.getId());
@@ -72,17 +72,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.findByCsidIn(secIds,pageable);
     }
 
-    /**
-     * 根据二级分类查找商品
-     *
-     * @param csid
-     * @param pageable
-     * @return
-     */
-    @Override
-    public List<Product> findByCsid(int csid, Pageable pageable) {
-        return productDao.findByCsid(csid,pageable);
-    }
+
 
 
     @Override

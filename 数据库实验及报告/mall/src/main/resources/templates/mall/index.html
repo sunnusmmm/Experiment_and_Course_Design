@@ -38,13 +38,6 @@
 
 <!--页面主体内容-->
 <div class="layui-container" id="content">
-    <!--个性推荐-->
-    <div class="layui-row">
-        <div class="layui-col-md12"><h1 class="site-h1"><i class="fa fa-heart" style="color: #FF5722;"></i> &nbsp;猜你喜欢
-        </h1></div>
-    </div>
-    <div class="layui-row" id="product_like">
-
     </div>
     <!--热门商品-->
     <div class="layui-row">
@@ -57,7 +50,7 @@
     <!--最新商品-->
     <div class="layui-row">
         <div class="layui-col-md12"><h1 class="site-h1"><i class="fa fa-calendar" style="color: #FFB800;"></i>
-            &nbsp;最新上架商品</h1></div>
+            &nbsp;所有商品</h1></div>
     </div>
     <div class="layui-row" style="text-align: center;">
         <div class="layui-row" id="product_new">
@@ -70,8 +63,6 @@
         //            <![CDATA[
         var pageNo = 0;
         $(function () {
-            //加载推荐商品
-            loadLike();
             //加载热门商品
             loadHot();
             //加载最新商品
@@ -82,16 +73,6 @@
             $.get("product/hot.do", function (data) {
                 if (data.state == 0) {
                     var div = $("#product_hot");
-                    appendToPage(div, data.data);
-                } else {
-                    layer.msg("请求失败！")
-                }
-            });
-        }
-        function loadLike() {
-            $.get("product/hot.do", function (data) {
-                if (data.state == 0) {
-                    var div = $("#product_like");
                     appendToPage(div, data.data);
                 } else {
                     layer.msg("请求失败！")

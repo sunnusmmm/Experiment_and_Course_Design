@@ -110,14 +110,12 @@
 
     </div>
     <script>
-        //        <![CDATA[
         function addCart() {
             var productId = $("#productId").val();
             if (!productId) {
                 layer.msg("错误！");
                 return;
             }
-
             $.get("addCart.do?productId=" + productId, function (data) {
                 if (data.state == 0) {
                     layer.msg("添加购物车成功！");
@@ -126,11 +124,8 @@
                 }
             });
         }
-
         function comments() {
-
         }
-
         //加载更多
         function more() {
             var load = layer.load();

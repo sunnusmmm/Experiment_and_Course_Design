@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta name="renderer" content="webkit"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>报错信息显示</title>
+    <title>404</title>
     <link rel="shortcut icon" th:href="@{/image/walmart.png}" type="image/x-icon"/>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
@@ -20,14 +20,12 @@
 <!--头部模块-->
 <div th:replace="mall/common::head"></div>
 <div class="layui-container" id="content">
-    <img style="text-align: center" th:src="@{/image/16.png}"/>
     <div class="layui-row" style="margin-top: 30px;text-align: center;">
-        <p style="font-size: 25px;font-weight: 300;color: #FF5722;" th:text="${msg}"></p>
         <br />
+        <img th:src="@{/image/error.jpg}"/>
         <P><span class="layui-badge" id="sec">1</span>&emsp;秒后返回...</P>
     </div>
     <script>
-        //        <![CDATA[
             var index ;
             index = window.setInterval(function () {
                 var sec = $("#sec").text();
@@ -38,7 +36,6 @@
                     $("#sec").text(--sec);
                 }
             },1000);
-        //        ]]>
     </script>
 </div>
 <!--底部-->

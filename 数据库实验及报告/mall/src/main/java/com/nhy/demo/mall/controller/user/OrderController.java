@@ -74,11 +74,7 @@ public class OrderController {
      * @param response
      */
     @RequestMapping("/submit.do")
-    public void submit(String name,
-                       String phone,
-                       String addr,
-                       HttpServletRequest request,
-                       HttpServletResponse response) throws Exception {
+    public void submit(String name, String phone, String addr, HttpServletRequest request, HttpServletResponse response) throws Exception {
         orderService.submit(name, phone, addr, request, response);
     }
 

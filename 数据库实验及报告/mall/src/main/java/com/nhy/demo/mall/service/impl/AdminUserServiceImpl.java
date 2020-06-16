@@ -41,7 +41,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public int create(AdminUser adminUser) {
         AdminUser adminUser1 = adminUserDao.save(adminUser);
-        return adminUser.getId();
+        return adminUser1.getId();
     }
 
     @Override

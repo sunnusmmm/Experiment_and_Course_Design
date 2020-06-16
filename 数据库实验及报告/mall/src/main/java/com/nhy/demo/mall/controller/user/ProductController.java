@@ -11,8 +11,6 @@ import com.nhy.demo.mall.entity.pojo.ResultBean;
 import com.nhy.demo.mall.service.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +51,7 @@ class ProductController {
         User user = userService.findById(id);
         map.put("product", product);
         map.put("user", user);
+
         return "mall/product/info";
     }
 
@@ -80,7 +79,8 @@ class ProductController {
     public ResultBean<List<Product>> getNewProduct(int pageNo, int pageSize) {
 //        Pageable pageable = new PageRequest(pageNo, pageSize);
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        List<Product> products = productService.findNewProduct(pageable);
+//        List<Product> products = productService.findNewProduct(pageable);
+        List<Product> products = productService.findAll(pageable).getContent();
         return new ResultBean<>(products);
     }
 
@@ -119,36 +119,6 @@ class ProductController {
     }
 
     /**
-     * 按二级分类查找商品
-     *
-     * @param csId
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/categorySec.do")
-    public ResultBean<List<Product>> getCategorySecProduct(int csId, int pageNo, int pageSize) {
-//        Pageable pageable = new PageRequest(pageNo, pageSize);
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        List<Product> products = productService.findByCsid(csId, pageable);
-        return new ResultBean<>(products);
-    }
-
-    /**
-     * 根据一级分类查询它所有的二级分类
-     *
-     * @param cid
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/getCategorySec.do")
-    public ResultBean<List<Classification>> getCategorySec(int cid) {
-        List<Classification> list = classificationService.findByParentId(cid);
-        return new ResultBean<>(list);
-    }
-
-    /**
      * 添加进入购物车
      *
      * @param productId
@@ -158,7 +128,8 @@ class ProductController {
     @ResponseBody
     @RequestMapping("/addCart.do")
     public ResultBean<Boolean> addToCart(int productId, HttpServletRequest request) throws Exception {
-        shopCartService.addCart(productId, request);
+//        shopCartService.addCart(productId, request);
+        shopCartService.add(productId, request);
         return new ResultBean<>(true);
     }
 
@@ -172,7 +143,8 @@ class ProductController {
     @ResponseBody
     @RequestMapping("/delCart.do")
     public ResultBean<Boolean> delToCart(int productId, HttpServletRequest request) throws Exception {
-        shopCartService.remove(productId, request);
+//        shopCartService.remove(productId, request);
+        shopCartService.delete(productId, request);
         return new ResultBean<>(true);
     }
 

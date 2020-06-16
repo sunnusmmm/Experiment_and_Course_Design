@@ -105,7 +105,7 @@
 
             $(items).each(function (index, item) {
                 var tr = $("<tr style='max-height: 200px;'></tr>");
-                tr.append($("<td style=''><img class='img_responsive' src='" + item.product.image + "'/></td>"));
+                // tr.append($('<div style=\'\'><img class=\'img_responsive\' src="item.image"/></div>'));
                 tr.append($("<td style='text-align: left;width: 180px;'>" + item.product.title + "</td>"));
                 tr.append($("<td>单价：" + item.product.shopPrice + "</td>"));
                 tr.append($("<td>数量：" + item.count + "</td>"));

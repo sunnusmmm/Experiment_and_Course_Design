@@ -33,14 +33,6 @@ public interface ClassificationService {
     Page<Classification> findAll(int type,Pageable pageable);
 
     /**
-     * 按条件查询
-     *
-     * @param example
-     * @return
-     */
-    List<Classification> findAllExample(Example<Classification> example);
-
-    /**
      * 更新
      *
      * @param Classification
@@ -63,11 +55,4 @@ public interface ClassificationService {
      * @return
      */
     void delById(int id);
-
-    /**
-     * 通过一级分类id查找它所有的二级分类
-     * @param cid
-     * @return
-     */
-    List<Classification> findByParentId(int cid);
 }

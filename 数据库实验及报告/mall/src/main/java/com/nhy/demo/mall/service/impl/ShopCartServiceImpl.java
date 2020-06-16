@@ -1,5 +1,7 @@
 package com.nhy.demo.mall.service.impl;
 
+import com.nhy.demo.mall.dao.ShopCartItemDao;
+import com.nhy.demo.mall.entity.ShopCartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nhy.demo.mall.entity.OrderItem;
@@ -8,6 +10,7 @@ import com.nhy.demo.mall.entity.User;
 import com.nhy.demo.mall.service.ProductService;
 import com.nhy.demo.mall.service.ShopCartService;
 import com.nhy.demo.mall.service.exception.LoginException;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -21,6 +24,9 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ShopCartItemDao shopCartItemDao;
 
     /**
      * 加购物车
@@ -44,13 +50,14 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     /**
      * 移除
-     *
+     * <p>
      * 移除session List中对应的商品Id
      *
      * @param productId
      * @param request
      */
     @Override
+    @Transactional
     public void remove(int productId, HttpServletRequest request) throws Exception {
         User loginUser = (User) request.getSession().getAttribute("user");
         if (loginUser == null)
@@ -66,7 +73,7 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     /**
      * 查看购物车
-     *
+     * <p>
      * 查询出session的List中所有的商品Id,并封装成List<OrderItem>返回
      *
      * @param request
@@ -77,10 +84,15 @@ public class ShopCartServiceImpl implements ShopCartService {
         User loginUser = (User) request.getSession().getAttribute("user");
         if (loginUser == null)
             throw new Exception("未登录！请重新登录");
-        List<Integer> productIds = (List<Integer>) request.getSession().getAttribute(NAME_PREFIX + loginUser.getId());
+//        List<Integer> productIds = (List<Integer>) request.getSession().getAttribute(NAME_PREFIX + loginUser.getId());
+        List<ShopCartItem> shopCartItems = shopCartItemDao.findByUserid(loginUser.getId());
+        List<Integer> productIds = new ArrayList<>();
+        for (ShopCartItem shopCartItem :shopCartItems){
+            productIds.add(shopCartItem.getProductid());
+        }
         // key: productId value:OrderItem
         Map<Integer, OrderItem> productMap = new HashMap<>();
-        if (productIds == null){
+        if (productIds == null) {
             return new ArrayList<>();
         }
         // 遍历List中的商品id，每个商品Id对应一个OrderItem
@@ -98,11 +110,31 @@ public class ShopCartServiceImpl implements ShopCartService {
                 int count = orderItem.getCount();
                 orderItem.setCount(++count);
                 Double subTotal = orderItem.getSubTotal();
-                orderItem.setSubTotal(orderItem.getSubTotal()+subTotal);
+                orderItem.setSubTotal(orderItem.getSubTotal() + subTotal);
                 productMap.put(productId, orderItem);
             }
         }
         List<OrderItem> orderItems = new ArrayList<>(productMap.values());
         return orderItems;
+    }
+
+    @Override
+    public void add(int product_id, HttpServletRequest request) throws Exception {
+        User loginUser = (User) request.getSession().getAttribute("user");
+        if (loginUser == null)
+            throw new Exception("未登录！请重新登录");
+        ShopCartItem shopCartItem = new ShopCartItem();
+        shopCartItem.setUserid(loginUser.getId());
+        shopCartItem.setProductid(product_id);
+        shopCartItemDao.save(shopCartItem);
+    }
+
+    @Override
+    @Transactional
+    public void delete(int product_id, HttpServletRequest request) throws Exception {
+        User loginUser = (User) request.getSession().getAttribute("user");
+        if (loginUser == null)
+            throw new Exception("未登录！请重新登录");
+        shopCartItemDao.deleteByUseridAndProductid(loginUser.getId(), product_id);
     }
 }

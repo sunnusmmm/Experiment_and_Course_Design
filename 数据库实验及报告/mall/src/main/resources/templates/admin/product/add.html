@@ -148,7 +148,7 @@
 
         //加载分类列表
         $.ajax({
-            url: "../classification/list.do?type=2&pageindex=-1",
+            url: "../classification/list.do?type=1&pageindex=-1",
             type: "get",
             success: function (result) {
                 if (result.state == 0) {
@@ -173,8 +173,6 @@
             select.append(option);
         }
     }
-
-    //    ]]>
 </script>
 </body>
 </html>

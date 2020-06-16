@@ -44,10 +44,6 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.findAll(pageable);
     }
 
-    @Override
-    public List<Order> findAllExample(Example<Order> example) {
-        return orderDao.findAll(example);
-    }
 
     @Override
     public void update(Order order) {
@@ -157,6 +153,7 @@ public class OrderServiceImpl implements OrderService {
             orderItem.setOrderId(order.getId());
             total += orderItem.getSubTotal();
             orderItemDao.save(orderItem);
+            shopCartService.delete(orderItem.getProductId(),request);
         }
         order.setTotal(total);
         orderDao.save(order);

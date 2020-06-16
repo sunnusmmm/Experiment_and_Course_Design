@@ -43,13 +43,6 @@ public interface ProductService {
      */
     List<Product> findByCid(int cid,Pageable pageable);
 
-    /**
-     * 根据二级分类查找商品
-     * @param csid
-     * @param pageable
-     * @return
-     */
-    List<Product> findByCsid(int csid,Pageable pageable);
 
     /**
      * 更新

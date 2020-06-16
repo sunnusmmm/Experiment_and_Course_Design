@@ -38,11 +38,6 @@ public class ClassificationServiceImpl implements ClassificationService {
     }
 
     @Override
-    public List<Classification> findAllExample(Example<Classification> example) {
-        return classificationDao.findAll(example);
-    }
-
-    @Override
     public void update(Classification classification) {
         classificationDao.save(classification);
     }
@@ -56,16 +51,5 @@ public class ClassificationServiceImpl implements ClassificationService {
     @Override
     public void delById(int id) {
         classificationDao.deleteById(id);
-    }
-
-    /**
-     * 通过一级分类id查找它所有的二级分类
-     *
-     * @param cid
-     * @return
-     */
-    @Override
-    public List<Classification> findByParentId(int cid) {
-        return classificationDao.findByParentId(cid);
     }
 }

@@ -30,13 +30,7 @@ public class AdminClassificationController {
      */
     @RequestMapping("/toList.html")
     public String toList(int type) {
-        if (type == 1) {// 一级分类页面
-            return "admin/category/list";
-        } else if (type == 2) {// 二级分类页面
-            return "admin/categorysec/list";
-        } else {
-            return "";
-        }
+        return "admin/category/list";
     }
 
     /**
@@ -47,13 +41,7 @@ public class AdminClassificationController {
      */
     @RequestMapping("/toAdd.html")
     public String toAdd(int type) {
-        if (type == 1) {// 一级分类页面
-            return "admin/category/add";
-        } else if (type == 2) {// 二级分类页面
-            return "admin/categorysec/add";
-        } else {
-            return "";
-        }
+        return "admin/category/add";
     }
 
     /**
@@ -68,24 +56,14 @@ public class AdminClassificationController {
     public String toEdit(int id, int type, Map<String, Object> map) {
         Classification classification = classificationService.findById(id);
         map.put("cate", classification);
-        if (type == 1) {// 一级分类页面
-            return "admin/category/edit";
-        } else if (type == 2) {// 二级分类页面
-            Classification classification1 = classificationService.findById(classification.getParentId());
-            map.put("cate", classification1);
-            map.put("catese", classification);
-            return "admin/categorysec/edit";
-        } else {
-            return "";
-        }
+        return "admin/category/edit";
     }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/add.do")
-    public ResultBean<Boolean> add(String cname, int parentId, int type) {
+    public ResultBean<Boolean> add(String cname, int type) {
         Classification classification = new Classification();
         classification.setCname(cname);
-        classification.setParentId(parentId);
         classification.setType(type);
         classificationService.create(classification);
         return new ResultBean<>(true);
@@ -96,7 +74,6 @@ public class AdminClassificationController {
     public ResultBean<Boolean> update(int id, String cname, int parentId, int type) {
         Classification classification = classificationService.findById(id);
         classification.setCname(cname);
-        classification.setParentId(parentId);
         classification.setType(type);
         classificationService.update(classification);
         return new ResultBean<>(true);

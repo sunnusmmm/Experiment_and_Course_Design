@@ -50,8 +50,7 @@ public class AdminUserController {
      */
     @ResponseBody
     @RequestMapping("/list.do")
-    public ResultBean<List<User>> findAllUser(int pageindex,
-                                              @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
+    public ResultBean<List<User>> findAllUser(int pageindex, @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
 //        Pageable pageable = new PageRequest(pageindex, pageSize, null);
         Pageable pageable = PageRequest.of(pageindex, pageSize);
         List<User> users = userService.findAll(pageable).getContent();
@@ -76,10 +75,7 @@ public class AdminUserController {
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/update.do")
-    public ResultBean<Boolean> update(int id, String username,
-                                      String password, String name,
-                                      String phone, String email,
-                                      String addr) {
+    public ResultBean<Boolean> update(int id, String username, String password, String name, String phone, String email, String addr) {
         // 更新前先查询
         User user = userService.findById(id);
         user.setId(id);

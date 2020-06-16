@@ -69,8 +69,6 @@ public class Product implements Serializable {
         this.categorySec = categorySec;
     }
 
-    private static final long serialVersionUID = 1L;
-
     public Product(Integer id, String title, Double marketPrice, Double shopPrice, String image, String desc, Integer isHot, Integer csid, Date pdate,String content) {
         this.id = id;
         this.title = title;
@@ -224,7 +222,6 @@ public class Product implements Serializable {
         sb.append(", csid=").append(csid);
         sb.append(", pdate=").append(pdate);
         sb.append(", content=").append(content);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

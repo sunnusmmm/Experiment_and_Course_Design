@@ -38,14 +38,6 @@ public interface OrderService {
     Page<Order> findAll(Pageable pageable);
 
     /**
-     * 按条件查询
-     *
-     * @param example
-     * @return
-     */
-    List<Order> findAllExample(Example<Order> example);
-
-    /**
      * 更新
      *
      * @param order

@@ -77,17 +77,11 @@
                             <li class="divider"></li>
                         -->
                         <li><a href="javascript:logout();"><i class="fa fa-key"></i>注销</a></li>
-
                     </ul>
-
                 </li>
-
             </ul>
-
         </div>
-
     </div>
-
 </div>
 
 <div class="page-container">
@@ -100,14 +94,8 @@
             </li>
             <li>
                 <form class="sidebar-search">
-
                     <div class="input-box">
-
                         <a href="javascript:;" class="remove"></a>
-
-                        <!--<input type="text" placeholder="搜索..."/>-->
-
-                        <!--<input type="button" class="submit" value=" "/>-->
                     </div>
                 </form>
             </li>
@@ -115,41 +103,18 @@
                 <a href="javascript:changePage('user');">
                     <i class="fa fa-user-circle"></i>
                     <span class="title" style="font-color:black;font-weight: bold">用户管理</span>
-                    <span class="selected"></span>
+
                 </a>
             </li>
-
             <li class="" id="category">
-
-                <a href="#">
-
-                    <i class="fa fa-object-group"></i>
-
-                    <span class="title" style="color:black;font-weight: bold">分类管理</span>
-
-                    <span class="arrow "></span>
-
+                <a href="javascript:changePage('category');">
+                    <i class="fa fa-file-text"></i>
+                    <span class="title" style="color:black;font-weight: bold">一级分类</span>
                 </a>
 
-                <ul class="sub-menu">
-
-                    <li id="category_1">
-                        <a href="javascript:changePage('category');">
-                            <i class="fa fa-list" style="color:black;font-weight: bold"></i>
-                            一级分类
-                        </a>
-                    </li>
-                    <li id="categorysec">
-                        <a href="javascript:changePage('categorySec');">
-                            <i class="fa fa-list" style="color:black;font-weight: bold"></i>
-                            二级分类
-                        </a>
-                    </li>
-                </ul>
             </li>
 
             <li class="" id="order">
-
                 <a href="javascript:changePage('order');">
                     <i class="fa fa-file-text"></i>
                     <span class="title" style="color:black;font-weight: bold">订单管理</span>
@@ -157,7 +122,6 @@
 
             </li>
             <li class="last" id="product">
-
                 <a href="javascript:changePage('product');">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="title" style="color:black;font-weight: bold">商品管理</span>
@@ -225,12 +189,7 @@
 
     function changePage(page) {
         $(".page-sidebar-menu li").removeClass("active");
-        if ('categorySec' == page) {
-            $("#category").addClass("active").find("a").eq(0).append($('<span class="selected"></span>'));
-            $("#categorysec").addClass("active");
-            $("#mainFrame").attr("src", "classification/toList.html?type=2");
-            return;
-        } else if ('category' == page) {
+        if ('category' == page) {
             $("#category").addClass("active").find("a").eq(0).append($('<span class="selected"></span>'));
             $("#category_1").addClass("active");
             $("#mainFrame").attr("src", "classification/toList.html?type=1");

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 /**
@@ -61,15 +62,14 @@ public class AuthorizationFilter implements Filter {
                     || path.endsWith("logout.do")
                     || path.endsWith("error.html")
                     || path.endsWith("checkUsername.do")
-                    || path.indexOf("/mall/admin/product/img/") != -1
+                    || path.contains("/mall/admin/product/img/")
                     || path.endsWith("index.html")
                     || path.endsWith("classification/list.do")
-                    || path.indexOf("product") != -1) {
+                    || path.contains("product")) {
                 chain.doFilter(request, response);
             } else {
                 processAccessControl(request, response, chain);
             }
-
         } else {
             //其他静态资源都不拦截
             chain.doFilter(request, response);
@@ -86,7 +86,7 @@ public class AuthorizationFilter implements Filter {
         Object adminUser = request.getSession().getAttribute("login_user");
         Object user = request.getSession().getAttribute("user");
         String url = request.getRequestURL().toString();
-        if (url.indexOf("admin") != -1){
+        if (url.contains("admin")){
             if (adminUser == null) {
                 response.sendRedirect("/mall/admin/toLogin.html");
             }else {
@@ -121,7 +121,7 @@ public class AuthorizationFilter implements Filter {
             return;
         String jsonStr = mapper.writeValueAsString(object);
         OutputStream out = response.getOutputStream();
-        out.write(jsonStr.getBytes("UTF-8"));
+        out.write(jsonStr.getBytes(StandardCharsets.UTF_8));
         out.flush();
     }
 }
