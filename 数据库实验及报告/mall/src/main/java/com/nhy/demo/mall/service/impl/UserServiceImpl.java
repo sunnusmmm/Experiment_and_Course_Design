@@ -1,7 +1,6 @@
 package com.nhy.demo.mall.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,11 +26,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllExample(Example<User> example) {
-        return userDao.findAll(example);
-    }
-
-    @Override
     public void update(User user) {
         userDao.save(user);
     }
@@ -46,24 +40,11 @@ public class UserServiceImpl implements UserService {
         userDao.deleteById(id);
     }
 
-    /**
-     * 根据用户名查询
-     *
-     * @param username
-     * @return
-     */
     @Override
     public List<User> findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
-    /**
-     * 检查登录
-     *
-     * @param username
-     * @param password
-     * @return
-     */
     @Override
     public User checkLogin(String username, String password) {
         return userDao.findByUsernameAndPassword(username, password);

@@ -22,36 +22,19 @@ public class AdminClassificationController {
     @Autowired
     private ClassificationService classificationService;
 
-    /**
-     * 返回列表页面
-     *
-     * @param type
-     * @return
-     */
+    //返回列表页面
     @RequestMapping("/toList.html")
     public String toList(int type) {
         return "admin/category/list";
     }
 
-    /**
-     * 打开添加分类页面
-     *
-     * @param type
-     * @return
-     */
+    //打开添加分类页面
     @RequestMapping("/toAdd.html")
     public String toAdd(int type) {
         return "admin/category/add";
     }
 
-    /**
-     * 打开编辑页面
-     *
-     * @param id
-     * @param type
-     * @param map
-     * @return
-     */
+    //打开编辑页面
     @RequestMapping("/toEdit.html")
     public String toEdit(int id, int type, Map<String, Object> map) {
         Classification classification = classificationService.findById(id);
@@ -94,7 +77,6 @@ public class AdminClassificationController {
         if (pageindex == -1)
             list = classificationService.findAll(type);
         else {
-//            Pageable pageable = new PageRequest(pageindex, pageSize, null);
             Pageable pageable = PageRequest.of(pageindex, pageSize);
             list = classificationService.findAll(type, pageable).getContent();
         }
@@ -104,7 +86,6 @@ public class AdminClassificationController {
     @ResponseBody
     @RequestMapping("/getTotal.do")
     public ResultBean<Integer> getTotal(int type) {
-//        Pageable pageable = new PageRequest(1, 30, null);
         Pageable pageable = PageRequest.of(1, 30);
         int count = (int) classificationService.findAll(type, pageable).getTotalElements();
         return new ResultBean<>(count);

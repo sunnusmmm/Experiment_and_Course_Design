@@ -18,35 +18,17 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer id;
-    /**
-     * 用户名
-     */
+    private Integer id;//ID
     @Column
-    private String username;
-    /**
-     * 密码
-     */
+    private String username;//用户名
     @Column
-    private String password;
-    /**
-     * 姓名
-     */
+    private String password;//密码
     @Column
-    private String name;
-    /**
-     * 邮件
-     */
+    private String name;//姓名
     @Column
-    private String email;
-    /**
-     * 电话
-     */
+    private String email;//邮箱
     @Column
-    private String phone;
-    /**
-     * 地址
-     */
+    private String phone;//电话
     @Column
-    private String addr;
+    private String addr;//地址
 }

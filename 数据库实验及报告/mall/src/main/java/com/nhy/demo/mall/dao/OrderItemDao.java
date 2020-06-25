@@ -6,10 +6,6 @@ import com.nhy.demo.mall.entity.OrderItem;
 import java.util.List;
 
 public interface OrderItemDao extends JpaRepository<OrderItem, Integer> {
-    /**
-     * 根据订单Id查询
-     * @param orderId
-     * @return
-     */
+    //根据订单Id查询
     List<OrderItem> findByOrderId(int orderId);
 }

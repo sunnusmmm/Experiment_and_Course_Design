@@ -1,7 +1,6 @@
 package com.nhy.demo.mall.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -61,12 +60,7 @@ public class OrderServiceImpl implements OrderService {
         orderDao.deleteById(id);
     }
 
-    /**
-     * 查询订单项详情
-     *
-     * @param orderId
-     * @return
-     */
+    //查询订单项详情
     @Override
     public List<OrderItem> findItems(int orderId) {
         List<OrderItem> list = orderItemDao.findByOrderId(orderId);
@@ -77,12 +71,7 @@ public class OrderServiceImpl implements OrderService {
         return list;
     }
 
-    /**
-     * 更改订单状态
-     *
-     * @param id
-     * @param status
-     */
+    //更改订单状态
     @Override
     public void updateStatus(int id, int status) {
         Order order = orderDao.findById(id).orElse(null);
@@ -90,12 +79,7 @@ public class OrderServiceImpl implements OrderService {
         orderDao.save(order);
     }
 
-    /**
-     * 查找用户的订单列表
-     *
-     * @param request
-     * @return
-     */
+    //查找用户的订单列表
     @Override
     public List<Order> findUserOrder(HttpServletRequest request) {
         //从session中获取登录用户的id，查找他的订单
@@ -107,30 +91,17 @@ public class OrderServiceImpl implements OrderService {
         return orders;
     }
 
-    /**
-     * 支付
-     *
-     * @param orderId
-     */
+    //支付
     @Override
     public void pay(int orderId) {
-        //具体逻辑就不实现了，直接更改状态为 待发货
+        //更改状态为 待发货
         Order order = orderDao.findById(orderId).orElse(null);
-        ;
         if (order == null)
             throw new RuntimeException("订单不存在");
         orderDao.updateState(STATE_WAITE_SEND, order.getId());
     }
 
-    /**
-     * 提交订单
-     *
-     * @param name
-     * @param phone
-     * @param addr
-     * @param request
-     * @param response
-     */
+    //提交订单
     @Override
     @Transactional
     public void submit(String name, String phone, String addr, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -161,11 +132,7 @@ public class OrderServiceImpl implements OrderService {
         response.sendRedirect("/mall/order/toList.html");
     }
 
-    /**
-     * 确认收货
-     *
-     * @param orderId
-     */
+    //确认收货
     @Override
     public void receive(int orderId) {
         Order order = orderDao.findById(orderId).orElse(null);

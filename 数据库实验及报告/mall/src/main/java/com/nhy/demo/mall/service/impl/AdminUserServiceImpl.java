@@ -29,11 +29,6 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public List<AdminUser> findAllExample(Example<AdminUser> example) {
-        return adminUserDao.findAll(example);
-    }
-
-    @Override
     public void update(AdminUser adminUser) {
         adminUserDao.save(adminUser);
     }

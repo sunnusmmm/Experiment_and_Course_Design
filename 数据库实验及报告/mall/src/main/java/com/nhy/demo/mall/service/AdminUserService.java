@@ -10,61 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface AdminUserService {
-    /**
-     * 根据id查询
-     *
-     * @param id
-     * @return
-     */
+    //根据id查询
     AdminUser findById(int id);
-
-    /**
-     * 分页查询所有
-     *
-     * @param pageable
-     * @return
-     */
+    //分页查询所有
     Page<AdminUser> findAll(Pageable pageable);
-
-    /**
-     * 按条件查询
-     *
-     * @param example
-     * @return
-     */
-    List<AdminUser> findAllExample(Example<AdminUser> example);
-
-    /**
-     * 更新
-     *
-     * @param adminUser
-     * @return
-     */
-    void update(AdminUser adminUser);
-
-    /**
-     * 创建
-     *
-     * @param adminUser
-     * @return
-     */
-    int create(AdminUser adminUser);
-
-    /**
-     * 根据Id删除
-     *
-     * @param id
-     * @return
-     */
-    void delById(int id);
-
-    /**
-     * 检查登录
-     * @param request
-     * @param username
-     * @param pwd
-     * @return
-     */
+    //检查登录
     AdminUser checkLogin(HttpServletRequest request,String username, String pwd);
 
+    void update(AdminUser adminUser);
+
+    int create(AdminUser adminUser);
+
+    void delById(int id);
 }

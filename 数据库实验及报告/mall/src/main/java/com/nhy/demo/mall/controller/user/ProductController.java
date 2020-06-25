@@ -26,25 +26,14 @@ class ProductController {
     @Autowired
     private UserService userService;
 
-    /**
-     * 获取商品信息
-     *
-     * @param id
-     * @return
-     */
+    //获取商品信息
     @RequestMapping("/get.do")
     public ResultBean<Product> getProduct(int id) {
         Product product = productService.findById(id);
         return new ResultBean<>(product);
     }
 
-    /**
-     * 打开商品详情页面
-     *
-     * @param id
-     * @param map
-     * @return
-     */
+    //打开商品详情页面
     @RequestMapping("/get.html")
     public String toProductPage(int id, Map<String, Object> map) {
         Product product = productService.findById(id);
@@ -55,11 +44,7 @@ class ProductController {
         return "mall/product/info";
     }
 
-    /**
-     * 查找热门商品
-     *
-     * @return
-     */
+    //查找热门商品
     @ResponseBody
     @RequestMapping("/hot.do")
     public ResultBean<List<Product>> getHotProduct() {
@@ -67,28 +52,16 @@ class ProductController {
         return new ResultBean<>(products);
     }
 
-    /**
-     * 查找最新商品
-     *
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
+    //查找所有商品
     @ResponseBody
     @RequestMapping("/new.do")
     public ResultBean<List<Product>> getNewProduct(int pageNo, int pageSize) {
-//        Pageable pageable = new PageRequest(pageNo, pageSize);
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-//        List<Product> products = productService.findNewProduct(pageable);
         List<Product> products = productService.findAll(pageable).getContent();
         return new ResultBean<>(products);
     }
 
-    /**
-     * 打开分类查看商品页面
-     *
-     * @return
-     */
+    //打开分类查看商品页面
     @RequestMapping("/category.html")
     public String toCatePage(int cid, Map<String, Object> map) {
         Classification classification = classificationService.findById(cid);
@@ -101,14 +74,7 @@ class ProductController {
         return "mall/product/cart";
     }
 
-    /**
-     * 按一级分类查找商品
-     *
-     * @param cid
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
+    //按分类查找商品
     @ResponseBody
     @RequestMapping("/category.do")
     public ResultBean<List<Product>> getCategoryProduct(int cid, int pageNo, int pageSize) {
@@ -118,42 +84,23 @@ class ProductController {
         return new ResultBean<>(products);
     }
 
-    /**
-     * 添加进入购物车
-     *
-     * @param productId
-     * @param request
-     * @return
-     */
+    //添加进入购物车
     @ResponseBody
     @RequestMapping("/addCart.do")
     public ResultBean<Boolean> addToCart(int productId, HttpServletRequest request) throws Exception {
-//        shopCartService.addCart(productId, request);
         shopCartService.add(productId, request);
         return new ResultBean<>(true);
     }
 
-    /**
-     * 移除购物车
-     *
-     * @param productId
-     * @param request
-     * @return
-     */
+    //移出购物车
     @ResponseBody
     @RequestMapping("/delCart.do")
     public ResultBean<Boolean> delToCart(int productId, HttpServletRequest request) throws Exception {
-//        shopCartService.remove(productId, request);
         shopCartService.delete(productId, request);
         return new ResultBean<>(true);
     }
 
-    /**
-     * 查看购物车商品
-     *
-     * @param request
-     * @return
-     */
+    //列出查看购物车商品清单
     @ResponseBody
     @RequestMapping("/listCart.do")
     public ResultBean<List<OrderItem>> listCart(HttpServletRequest request) throws Exception {

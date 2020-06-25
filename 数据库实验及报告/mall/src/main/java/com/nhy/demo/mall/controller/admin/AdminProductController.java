@@ -54,9 +54,7 @@ public class AdminProductController {
 
     @ResponseBody
     @RequestMapping("/list.do")
-    public ResultBean<List<Product>> listProduct(int pageindex,
-                                                 @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
-//        Pageable pageable = new PageRequest(pageindex, pageSize, null);
+    public ResultBean<List<Product>> listProduct(int pageindex, @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
         Pageable pageable = PageRequest.of(pageindex, pageSize);
         List<Product> list = productService.findAll(pageable).getContent();
         return new ResultBean<>(list);
@@ -65,7 +63,6 @@ public class AdminProductController {
     @ResponseBody
     @RequestMapping("/getTotal")
     public ResultBean<Integer> getTotal() {
-//        Pageable pageable = new PageRequest(1, 15, null);
         Pageable pageable = PageRequest.of(1, 15);
         int total = (int) productService.findAll(pageable).getTotalElements();
         return new ResultBean<>(total);
@@ -79,16 +76,7 @@ public class AdminProductController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/add.do")
-    public void add(MultipartFile image,
-                    String title,
-                    Double marketPrice,
-                    Double shopPrice,
-                    int isHot,
-                    String desc,
-                    int csid,
-                    String content,
-                    HttpServletRequest request,
-                    HttpServletResponse response) throws Exception {
+    public void add(MultipartFile image, String title, Double marketPrice, Double shopPrice, int isHot, String desc, int csid, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Product product = new Product();
         product.setTitle(title);
         product.setMarketPrice(marketPrice);
@@ -97,7 +85,6 @@ public class AdminProductController {
         product.setIsHot(isHot);
         product.setCsid(csid);
         product.setPdate(new Date());
-        product.setContent(content);
         String imgUrl = FileUtil.saveFile(image);
         product.setImage(imgUrl);
         int id = productService.create(product);
@@ -111,17 +98,7 @@ public class AdminProductController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/update.do")
-    public void update(int id,
-                       String title,
-                       Double marketPrice,
-                       Double shopPrice,
-                       String desc,
-                       int csid,
-                       int isHot,
-                       String content,
-                       MultipartFile image,
-                       HttpServletRequest request,
-                       HttpServletResponse response) throws Exception {
+    public void update(int id, String title, Double marketPrice, Double shopPrice, String desc, int csid, int isHot, MultipartFile image, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Product product = productService.findById(id);
         product.setTitle(title);
         product.setMarketPrice(marketPrice);
@@ -129,7 +106,6 @@ public class AdminProductController {
         product.setDesc(desc);
         product.setIsHot(isHot);
         product.setCsid(csid);
-        product.setContent(content);
         product.setPdate(new Date());
         String imgUrl = FileUtil.saveFile(image);
         if (StringUtils.isNotBlank(imgUrl)) {

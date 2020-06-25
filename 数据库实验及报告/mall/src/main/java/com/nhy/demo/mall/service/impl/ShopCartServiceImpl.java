@@ -9,13 +9,11 @@ import com.nhy.demo.mall.entity.Product;
 import com.nhy.demo.mall.entity.User;
 import com.nhy.demo.mall.service.ProductService;
 import com.nhy.demo.mall.service.ShopCartService;
-import com.nhy.demo.mall.service.exception.LoginException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,70 +25,17 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     @Autowired
     private ShopCartItemDao shopCartItemDao;
-
-    /**
-     * 加购物车
-     * 将商品id保存到Session中List<Integer>中
-     *
-     * @param productId
-     * @param request
-     */
-    @Override
-    public void addCart(int productId, HttpServletRequest request) throws Exception {
-        User loginUser = (User) request.getSession().getAttribute("user");
-        if (loginUser == null)
-            throw new Exception("未登录！请重新登录");
-        List<Integer> productIds = (List<Integer>) request.getSession().getAttribute(NAME_PREFIX + loginUser.getId());
-        if (productIds == null) {
-            productIds = new ArrayList<>();
-            request.getSession().setAttribute(NAME_PREFIX + loginUser.getId(), productIds);
-        }
-        productIds.add(productId);
-    }
-
-    /**
-     * 移除
-     * <p>
-     * 移除session List中对应的商品Id
-     *
-     * @param productId
-     * @param request
-     */
-    @Override
-    @Transactional
-    public void remove(int productId, HttpServletRequest request) throws Exception {
-        User loginUser = (User) request.getSession().getAttribute("user");
-        if (loginUser == null)
-            throw new Exception("未登录！请重新登录");
-        List<Integer> productIds = (List<Integer>) request.getSession().getAttribute(NAME_PREFIX + loginUser.getId());
-        Iterator<Integer> iterator = productIds.iterator();
-        while (iterator.hasNext()) {
-            if (productId == iterator.next()) {
-                iterator.remove();
-            }
-        }
-    }
-
-    /**
-     * 查看购物车
-     * <p>
-     * 查询出session的List中所有的商品Id,并封装成List<OrderItem>返回
-     *
-     * @param request
-     * @return
-     */
+    //查询所有订单项目
     @Override
     public List<OrderItem> listCart(HttpServletRequest request) throws Exception {
         User loginUser = (User) request.getSession().getAttribute("user");
         if (loginUser == null)
             throw new Exception("未登录！请重新登录");
-//        List<Integer> productIds = (List<Integer>) request.getSession().getAttribute(NAME_PREFIX + loginUser.getId());
         List<ShopCartItem> shopCartItems = shopCartItemDao.findByUserid(loginUser.getId());
         List<Integer> productIds = new ArrayList<>();
         for (ShopCartItem shopCartItem :shopCartItems){
             productIds.add(shopCartItem.getProductid());
         }
-        // key: productId value:OrderItem
         Map<Integer, OrderItem> productMap = new HashMap<>();
         if (productIds == null) {
             return new ArrayList<>();

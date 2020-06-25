@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title>添加一级分类</title>
+    <title>添加分类</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
@@ -28,7 +28,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="#">添加一级分类</a>
+                <a href="#">添加分类</a>
             </li>
         </ul>
     </div>
@@ -37,13 +37,13 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-reorder"></i>
-                    添加一级分类
+                    添加分类
                 </div>
             </div>
             <div class="portlet-body">
                 <form class="form-horizontal" action="#">
                     <div class="control-group">
-                        <label class="control-label">一级分类名称：</label>
+                        <label class="control-label">分类名称：</label>
                         <div class="controls">
                             <input name="cname" type="text" class="m-wrap media"/>
                             <input name="type" type="hidden" value="1"/>
@@ -89,13 +89,13 @@
             cache: true,
             type: "POST",
             url: "add.do",
-            data: $('.form-horizontal').serialize(),// 你的formid
+            data: $('.form-horizontal').serialize(),
             async: false,
             error: function (request) {
                 alert("Connection error");
             },
             success: function (result) {
-                if (result.state == 0) {
+                if (result.state === 0) {
                     alert("创建成功！");
                 } else {
                     alert(result.message);

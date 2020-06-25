@@ -6,65 +6,18 @@ import com.nhy.demo.mall.entity.Product;
 import java.util.List;
 
 public interface ProductService {
-    /**
-     * 根据id查询
-     *
-     * @param id
-     * @return
-     */
+    //根据ID查询商品
     Product findById(int id);
 
-    /**
-     * 分页查询所有
-     *
-     * @param pageable
-     * @return
-     */
+    //查找所有商品
     Page<Product> findAll(Pageable pageable);
 
-    /**
-     * 查找热门商品
-     * @return
-     */
+    //热门商品
     List<Product> findHotProduct();
-
-    /**
-     * 查找最新商品
-     * @param pageable
-     * @return
-     */
-    List<Product> findNewProduct(Pageable pageable);
-
-    /**
-     * 根据一级分类查找商品
-     * @param cid
-     * @param pageable
-     * @return
-     */
+    //按分类查找商品
     List<Product> findByCid(int cid,Pageable pageable);
 
-
-    /**
-     * 更新
-     *
-     * @param product
-     * @return
-     */
     void update(Product product);
-
-    /**
-     * 创建
-     *
-     * @param product
-     * @return
-     */
     int create(Product product);
-
-    /**
-     * 根据Id删除
-     *
-     * @param id
-     * @return
-     */
     void delById(int id);
 }

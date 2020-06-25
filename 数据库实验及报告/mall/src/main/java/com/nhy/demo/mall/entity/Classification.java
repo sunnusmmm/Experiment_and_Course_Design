@@ -21,15 +21,9 @@ public class Classification implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer id;
-    /**
-     * 分类名称
-     */
+    private Integer id;//ID
     @Column
-    private String cname;
-    /**
-     * 类型 1一级分类 2二级分类
-     */
+    private String cname;//类名
     @Column
-    private Integer type;
+    private Integer type;//类别
 }

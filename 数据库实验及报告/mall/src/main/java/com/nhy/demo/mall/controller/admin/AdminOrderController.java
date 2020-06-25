@@ -20,49 +20,31 @@ public class AdminOrderController {
     @Autowired
     private OrderService orderService;
 
-    /**
-     * 打开订单列表页面
-     * @return
-     */
+    //打开订单列表页面
     @RequestMapping("/toList.html")
     public String toList() {
         return "admin/order/list";
     }
 
-    /**
-     * 获取所有订单的总数
-     * @return
-     */
+    // 获取所有订单的总数
     @ResponseBody
     @RequestMapping("/getTotal.do")
     public ResultBean<Integer> getTotal() {
-//        Pageable pageable = new PageRequest(1, 15, null);
         Pageable pageable = PageRequest.of(1, 15);
         int total = (int) orderService.findAll(pageable).getTotalElements();
         return new ResultBean<>(total);
     }
 
-    /**
-     * 获取所有订单
-     * @param pageindex
-     * @param pageSize
-     * @return
-     */
+    //获取所有订单
     @ResponseBody
     @RequestMapping("/list.do")
-    public ResultBean<List<Order>> listData(int pageindex,
-                                            @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
-//        Pageable pageable = new PageRequest(pageindex, pageSize, null);
+    public ResultBean<List<Order>> listData(int pageindex, @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
         Pageable pageable = PageRequest.of(pageindex, pageSize);
         List<Order> list = orderService.findAll(pageable).getContent();
         return new ResultBean<>(list);
     }
 
-    /**
-     * 获取订单项
-     * @param orderId
-     * @return
-     */
+    //获取订单项
     @ResponseBody
     @RequestMapping("/getDetail.do")
     public ResultBean<List<OrderItem>> getDetail(int orderId) {
@@ -70,15 +52,11 @@ public class AdminOrderController {
         return new ResultBean<>(list);
     }
 
-    /**
-     * 发货
-     * @param id
-     * @return
-     */
+    //发货
     @ResponseBody
     @RequestMapping("/send.do")
     public ResultBean<Boolean> send(int id) {
-        orderService.updateStatus(id,3);
+        orderService.updateStatus(id, 3);
         return new ResultBean<>(true);
     }
 }

@@ -21,27 +21,15 @@ public class OrderItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer id;
-    /**
-     * 订单Id
-     */
+    private Integer id;//ID
     @Column
-    private Integer orderId;
-    /**
-     * 商品Id
-     */
+    private Integer orderId;//订单号
     @Column
-    private Integer productId;
-    /**
-     * 数量
-     */
+    private Integer productId;//商品ID
     @Column
-    private Integer count;
-    /**
-     * 总价
-     */
+    private Integer count;//数量
     @Column
-    private Double subTotal;
+    private Double subTotal;//总价
 
     @Transient
     private Product product;

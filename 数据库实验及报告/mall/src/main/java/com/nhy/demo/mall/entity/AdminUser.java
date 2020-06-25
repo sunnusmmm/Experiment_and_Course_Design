@@ -22,9 +22,9 @@ public class AdminUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer id;
-    @Column(nullable = false)
-    private String username;
+    private Integer id;//ID
     @Column
-    private String password;
+    private String username;//账户名
+    @Column
+    private String password;//密码
 }

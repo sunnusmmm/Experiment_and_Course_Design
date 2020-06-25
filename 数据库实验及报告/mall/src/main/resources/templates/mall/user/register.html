@@ -24,9 +24,6 @@
 <div th:replace="mall/common::head"></div>
 <div class="layui-container" id="content">
     <div class="layui-row">
-        <div style="position: absolute; left: 0; right: 0; z-index: -1">
-            <img th:src="@{/image/19.jpg}"/>
-        </div>
         <div id="cont" class="layui-col-xs12 layui-col-sm12 layui-col-md12 smaller">
             <fieldset class="layui-elem-field layui-field-title">
                 <legend>欢迎注册</legend>
@@ -100,12 +97,9 @@
 
     </div>
     <script>
-        //        <![CDATA[
-        // 加载layui form模块
         layui.use('form', function () {
             var form = layui.form;
         });
-
         // ajax异步校验用户名是否唯一
         function checkUsername() {
             var username = $("input[name='username']").val();

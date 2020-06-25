@@ -18,23 +18,13 @@ public class AdminUserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * 打开用户列表页面
-     *
-     * @return
-     */
+    //打开用户列表页面
     @RequestMapping("/toList.html")
     public String toList() {
         return "admin/user/list";
     }
 
-    /**
-     * 打开编辑页面
-     *
-     * @param id
-     * @param map
-     * @return
-     */
+    //打开编辑页面
     @RequestMapping("/toEdit.html")
     public String toEdit(int id, Map<String, Object> map) {
         User user = userService.findById(id);
@@ -42,16 +32,10 @@ public class AdminUserController {
         return "admin/user/edit";
     }
 
-    /**
-     * 获取所有用户列表
-     *
-     * @param pageindex
-     * @return
-     */
+    //获取所有用户列表
     @ResponseBody
     @RequestMapping("/list.do")
     public ResultBean<List<User>> findAllUser(int pageindex, @RequestParam(value = "pageSize", defaultValue = "15") int pageSize) {
-//        Pageable pageable = new PageRequest(pageindex, pageSize, null);
         Pageable pageable = PageRequest.of(pageindex, pageSize);
         List<User> users = userService.findAll(pageable).getContent();
         return new ResultBean<>(users);
@@ -60,7 +44,6 @@ public class AdminUserController {
     @ResponseBody
     @RequestMapping("/getTotal.do")
     public ResultBean<Integer> geTotal() {
-//        Pageable pageable = new PageRequest(1, 15, null);
         Pageable pageable = PageRequest.of(1, 15);
         int total = (int) userService.findAll(pageable).getTotalElements();
         return new ResultBean<>(total);

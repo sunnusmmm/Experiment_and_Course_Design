@@ -43,3 +43,38 @@ Server技术栈——Spring Boot + Jpa + Thymeleft + MySQL
 | 购物车   | ID、所属用户ID、商品ID                                       |
 | 订单     | ID、创建日期、客户ID、订单号、联系电话、收货地址、订单状态、总价 |
 | 订单小项 | ID、订单号、商品ID、单项金额                                 |
+
+#### 附录
+
+环境配置：
+
+操作系统：Windows 10
+
+IDE：IntelliJ IDEA 2020.1
+
+JAVA ：JDK 1.8
+
+Spring Boot：Spring Boot 2.3.0 released
+
+配置文件application.properties(resource文件夹下)：可在配置文件中配置端口号以及连接MYSQL数据库。
+
+运行项目：
+
+1、在本地数据库中导入SQL文件数据，SQL文件存放在根目录data下
+
+2、在配置文件中配置连接自己的本地数据库（MYSQL）或者其他数据库。
+
+> 注意：该项目中使用的是MYSQL 8.x 连接驱动与 MYSQL 5.x有些许不同
+>
+> MYSQL 8.x：com.mysql.cj.jdbc.Driver
+>
+> MYSQL 5.x：com.mysql.jdbc.Driver
+
+3、在IDEA中找到启动类MallApplication，运行即可。
+
+4、访问前端网站首页网址：localhost:8080/mall。
+
+5、在运行过程中，后台服务器会输出对应的SQL语句，可以在配置文件中选择不输出
+
+> spring.jpa.properties.hibernate.show_sql=true
+

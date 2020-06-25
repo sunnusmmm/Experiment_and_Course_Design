@@ -20,39 +20,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * 打开注册页面
-     *
-     * @return
-     */
+    //打开注册页面
     @RequestMapping("/toRegister.html")
     public String toRegister() {
         return "mall/user/register";
     }
 
-    /**
-     * 打开登录页面
-     *
-     * @return
-     */
+    //打开登录页面
     @RequestMapping("/toLogin.html")
     public String toLogin() {
         return "mall/user/login";
     }
 
-    /**
-     * 登录
-     *
-     * @param username
-     * @param password
-     */
-            @RequestMapping("/login.do")
-            public void login(String username,
-                    String password,
-                    HttpServletRequest request,
-                    HttpServletResponse response) throws IOException {
-                User user = userService.checkLogin(username, password);
-                if (user != null) {
+    //登录
+    @RequestMapping("/login.do")
+    public void login(String username, String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = userService.checkLogin(username, password);
+        if (user != null) {
             //登录成功 重定向到首页
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/mall/index.html");
@@ -62,17 +46,9 @@ public class UserController {
 
     }
 
-    /**
-     * 注册
-     */
+    //注册
     @RequestMapping("/register.do")
-    public void register(String username,
-                         String password,
-                         String name,
-                         String phone,
-                         String email,
-                         String addr,
-                         HttpServletResponse response) throws IOException {
+    public void register(String username, String password, String name, String phone, String email, String addr, HttpServletResponse response) throws IOException {
         User user = new User();
         user.setUsername(username);
         user.setPhone(phone);
@@ -85,37 +61,25 @@ public class UserController {
         response.sendRedirect("/mall/user/toLogin.html");
     }
 
-    /**
-     * 登出
-     */
+    //注销
     @RequestMapping("/logout.do")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().removeAttribute("user");
         response.sendRedirect("/mall/index.html");
     }
 
-    /**
-     * 验证用户名是否唯一
-     * @param username
-     * @return
-     */
+    //验证用户名是否唯一
     @ResponseBody
     @RequestMapping("/checkUsername.do")
-    public ResultBean<Boolean> checkUsername(String username){
+    public ResultBean<Boolean> checkUsername(String username) {
         List<User> users = userService.findByUsername(username);
-        if (users==null||users.isEmpty()){
+        if (users == null || users.isEmpty()) {
             return new ResultBean<>(true);
         }
         return new ResultBean<>(false);
     }
 
-    /**
-     * 如发生错误 转到这页面
-     *
-     * @param response
-     * @param request
-     * @return
-     */
+    //错误处理
     @RequestMapping("/error.html")
     public String error(HttpServletResponse response, HttpServletRequest request) {
         return "error";

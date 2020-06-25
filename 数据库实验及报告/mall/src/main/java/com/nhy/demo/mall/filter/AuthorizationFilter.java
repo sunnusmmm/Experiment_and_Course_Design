@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 /**
  * 权限拦截器
- * @date 2018/6/1
  */
 @WebFilter
 public class AuthorizationFilter implements Filter {
@@ -106,13 +105,6 @@ public class AuthorizationFilter implements Filter {
 
     }
 
-    /**
-     * 返回JOSN数据格式
-     *
-     * @param response
-     * @param object
-     * @throws IOException
-     */
     public static void responseJSON(HttpServletResponse response, Object object) throws IOException {
         response.setContentType("application/json;charset=utf-8");
         response.setCharacterEncoding("UTF-8");

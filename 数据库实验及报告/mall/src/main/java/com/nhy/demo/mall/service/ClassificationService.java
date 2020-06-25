@@ -8,51 +8,18 @@ import com.nhy.demo.mall.entity.Classification;
 import java.util.List;
 
 public interface ClassificationService {
-    /**
-     * 根据id查询
-     *
-     * @param id
-     * @return
-     */
+    //根据id查询
     Classification findById(int id);
 
-    /**
-     * 按分类查询所有
-     *
-     * @param type
-     * @return
-     */
+    //按分类查询所有
     List<Classification> findAll(int type);
 
-    /**
-     * 按分类查询所有
-     *
-     * @param pageable
-     * @return
-     */
+    //按分类查询所有
     Page<Classification> findAll(int type,Pageable pageable);
 
-    /**
-     * 更新
-     *
-     * @param Classification
-     * @return
-     */
     void update(Classification Classification);
 
-    /**
-     * 创建
-     *
-     * @param Classification
-     * @return
-     */
     int create(Classification Classification);
 
-    /**
-     * 根据Id删除
-     *
-     * @param id
-     * @return
-     */
     void delById(int id);
 }

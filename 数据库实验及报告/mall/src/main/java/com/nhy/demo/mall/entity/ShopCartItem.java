@@ -15,10 +15,9 @@ public class ShopCartItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer id;
-
+    private Integer id;//ID
     @Column
-    private Integer userid;
+    private Integer userid;//所属用户ID
     @Column
-    private Integer productid;
+    private Integer productid;//商品ID
 }

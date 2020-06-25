@@ -6,18 +6,8 @@ import com.nhy.demo.mall.entity.User;
 import java.util.List;
 
 public interface UserDao extends JpaRepository<User, Integer> {
-    /**
-     * 根据用户名，密码查询用户
-     * @param username
-     * @param password
-     * @return
-     */
+    //根据用户名、密码查询用户
     User findByUsernameAndPassword(String username, String password);
-
-    /**
-     * 根据用户名查询用户
-     * @param username
-     * @return
-     */
+    //更据用户名查找用户
     List<User> findByUsername(String username);
 }

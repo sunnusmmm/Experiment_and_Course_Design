@@ -13,44 +13,24 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer id;
-    /**
-     * 订单总价
-     */
+    private Integer id;//ID
     @Column
-    private Double total;
+    private Double total;//总价
     /**
      * 订单状态 1:未付款 2:等待发货 3:等待收货 4:订单完成
      */
     @Column
-    private Integer state;
-    /**
-     * 订单时间
-     */
+    private Integer state;//订单状态
     @Column
-    private Date orderTime;
-    /**
-     * 收货人姓名
-     */
+    private Date orderTime;//订单时间
     @Column(name = "`name`")
-    private String name;
-    /**
-     * 收货人联系电话
-     */
+    private String name;//收货人姓名
     @Column
-    private String phone;
-    /**
-     * 收货地址
-     */
+    private String phone;//联系电话
     @Column
-    private String addr;
-    /**
-     * 用户Id
-     */
+    private String addr;//收货地址
     @Column
-    private Integer userId;
-
-    private static final long serialVersionUID = 1L;
+    private Integer userId;//用户ID
 
     public Order(Integer id, Double total, Integer state, Date orderTime, String name, String phone, String addr, Integer userId) {
         this.id = id;
@@ -182,7 +162,6 @@ public class Order implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", addr=").append(addr);
         sb.append(", userId=").append(userId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }
