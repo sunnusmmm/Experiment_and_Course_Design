@@ -1,5 +1,6 @@
 #include "def.h"
 #include "parser.tab.h"
+//#define V 0 控制是否打印语法树
 
 struct ASTNode * mknode(int num,int kind,int pos,...){
     struct ASTNode *T=(struct ASTNode *)calloc(sizeof(struct ASTNode),1);
@@ -18,6 +19,7 @@ struct ASTNode * mknode(int num,int kind,int pos,...){
 
 void display(struct ASTNode *T,int indent)
 {//对抽象语法树的先根遍历
+#ifdef V
   int i=1;
   struct ASTNode *T0;
   if (T)
@@ -194,4 +196,5 @@ void display(struct ASTNode *T,int indent)
                     break;
          }
       }
+#endif // SHOW
 }

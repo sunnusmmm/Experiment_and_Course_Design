@@ -118,8 +118,9 @@ extern int yydebug;
     FOR = 328,
     FOR_DEC = 329,
     ARRAY_LIST = 330,
-    UMINUS = 331,
-    LOWER_THEN_ELSE = 332
+    ARRAY_CALL = 331,
+    UMINUS = 332,
+    LOWER_THEN_ELSE = 333
   };
 #endif
 
@@ -136,7 +137,7 @@ union YYSTYPE
 	char   type_id[32];
 	struct ASTNode *ptr;
 
-#line 140 "parser.tab.h" /* yacc.c:1909  */
+#line 141 "parser.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

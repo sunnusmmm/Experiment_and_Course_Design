@@ -1,57 +1,46 @@
-int a;
-float b;
-char c;
-string d;
-int e[2];
-struct V{
-    int a;
-    char b;
-    float c;
-    string d;
-};
-
-int Max(int a,int b){
-	if(a>b)
-		return a;
-	else
-		return b;
-}
-int main(){//主函数
-	int a,b,i;
-	int v[2][3]=[[1,2,3],[4,5,6]];
-	char c = 'Q';
-	string s = "QAQ";
-	a = 5;
-	b = 6;
-	i = Max(a,b);
-	switch(a){	
-        case 1:
-            i++;
-            i--;
-            break;
-        case 3:
-            i+=1;
-            i-=1;
-            break;
-        case 5:
-            i*=1;
-            i/=1;
-            break;
-        default:
-            break;
-    }
-	for(a=1;a<10;a++){
-        s.a=1;
-        s.b = '1';
-        s.c = 1.0;
-        s.d = "nhy_test";
-    }
+int a;//声明int
+float b;//声明float
+char c;//声明char
+int d[2];
+/*
+*main函数定义
+*/
+int main(){
+	int a = 2;
+	float b = 3.0;
+	int i;
+    int v[2][3]=[[1,2,3],[4,5,6]];
+	/*
+	*if-else语句测试
+	*/
+	if(a>b){
+		a = b;
+	}else{
+		b = a;
+	}
+	/*
+	*while循环语句测试
+	*/
 	while(a <= 5){
-		int m;
-		a += 1;
-        if(i = 5) break;
-        if(i != 5) continue;
-    }
-    return 1;
+		int k = 0;
+	}
+	/*
+	*for循环语句测试
+	*/
+	for(i = 1; i < 10; i++){
+		if(i = 5) 
+			break;
+		else
+			continue;		
+	}
+	/*
+	*赋值语句测试
+	*/
+	a = a + b;
+	a += 1;
+	a -= b;
+	a *= 1;
+	a /= b;
+	a %= 1;
+	return 0;
 }
-int k;

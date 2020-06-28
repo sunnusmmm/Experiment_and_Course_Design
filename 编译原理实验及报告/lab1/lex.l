@@ -1,82 +1,91 @@
-%option yylineno
 %{
 #include "parser.tab.h"
 #include "string.h"
-#include "node.h"
+#include "def.h"
 int yycolumn=1;
-#define YY_USER_ACTION    	yylloc.first_line=yylloc.last_line=yylineno;yylloc.first_column=yycolumn;	yylloc.last_column=yycolumn+yyleng-1; yycolumn+=yyleng;
+#define YY_USER_ACTION    	yylloc.first_line=yylloc.last_line=yylineno; \
+	yylloc.first_column=yycolumn;	yylloc.last_column=yycolumn+yyleng-1; yycolumn+=yyleng;
 typedef union {
 	int type_int;
 	char type_char;
-	float type_float;
+	int type_float;
 	char type_id[32];
 	struct node *ptr;
 } YYLVAL;
 #define YYSTYPE YYLVAL
+
 %}
+%option yylineno
 %x COMMENT
 
-ID   [A-Za-z][A-Za-z0-9]*  
-INT [0-9]+
-FLOAT [0-9]*\.[0-9]+)|([0-9]+\.
-CHAR ['][^\n][']
-STRING ["][^\n]*["]
+id   [A-Za-z][A-Za-z0-9]*  
+int    [0-9]+
+float  ([0-9]*\.[0-9]+)|([0-9]+\.)
+char ['][^\n][']
 
 %%
-{INT} {yylval.type_int=atoi(yytext); return INT;}
-{FLOAT}  {yylval.type_float=atof(yytext); return FLOAT;}
-{CHAR}   {yylval.type_char=yytext[1];return CHAR;}
-{STRING} {strncpy(yylval.type_id,yytext+1,strlen(yytext)-2);return STRING;}//string
-"int"    {strcpy(yylval.type_id, yytext);return TYPE;}
-"float"  {strcpy(yylval.type_id, yytext);return TYPE;}
-"char"   {strcpy(yylval.type_id, yytext);return TYPE;}
-"string" {strcpy(yylval.type_id,yytext);return TYPE;}//string
-"struct" {return STRUCT;}//struct
+{int}        {yylval.type_int=atoi(yytext); return INT;}
+{float}      {yylval.type_float=atof(yytext); return FLOAT;}
+{char}      {yylval.type_float=atof(yytext); return CHAR;}
+"int"        {strcpy(yylval.type_id,  yytext);return TYPE;}
+"float"      {strcpy(yylval.type_id,  yytext);return TYPE;}
+"char"      {strcpy(yylval.type_id,  yytext);return TYPE;}
 
-"if"     {return IF;}
-"else"   {return ELSE;}
-"while"  {return WHILE;}
-"break"	 {return BREAK;} // break
-"continue" {return CONTINUE;} //continue
-"for"	 {return FOR;}//for
-"switch" {return SWITCH;}//switch
-"case"	 {return CASE;}//case
-"default" {return DEFAULT;}//DEFAULT
-"return" {return RETURN;}
+"return"     {return RETURN;}
+"if"         {return IF;}
+"else"       {return ELSE;}
+"while"      {return WHILE;}
+"for"		 {return FOR;}
+"break"		 {return BREAK;}
+"continue"	 {return CONTINUE;}
 
-{ID}     {strcpy(yylval.type_id,  yytext); return ID;}
-":"		 {return COLON;}
-";"		 {return SEMI;}
-","		 {return COMMA;}
-">"|"<"|">="|"<="|"=="|"!=" {strcpy(yylval.type_id, yytext);return RELOP;}
-"="		 {return ASSIGNOP;}
-"+"		 {return PLUS;}
-"-"		 {return MINUS;}
-"*"		 {return STAR;}
-"/"		 {return DIV;}
-"."      {return DOT;}
-"%"      {return MOD;}
-"&&"     {return AND;}
-"||"     {return OR;}
-"!"		 {return NOT;}
-"("		 {return LP;}
-")"		 {return RP;}
-"{"		 {return LC;}
-"}"		 {return RC;}
-"["      {return LB;}
-"]"      {return RB;}
-[\n]     {yycolumn=1;}   
-[ \r\t]  {}
-\/\/[^\n]*  {printf("(%s, LINECOMMENT)\n", yytext);}//匹配注释
-.		 {printf("Error character: \"%s\"\n\t at Line %d\n",yytext,yylineno);}
+{id}       {strcpy(yylval.type_id,  yytext); return ID;/*由于关键字的形式也符合标识符的规则，所以把关键字的处理全部放在标识符的前面，优先识别*/}
+";"			{return SEMI;}
+","			{return COMMA;}
+">"|"<"|">="|"<="|"=="|"!=" {strcpy(yylval.type_id, yytext);;return RELOP;}
+"="			{return ASSIGNOP;}
+"+"			{return PLUS;}
+"-"			{return MINUS;}
+"*"			{return STAR;}
+"/"			{return DIV;}
+"%"			{return MOD;}
 
- /* 注释 */
+"++"     {return AUTOPLUS;}//自增
+"--"     {return AUTOMINUS;}//自减
+"+="     {return PLUSASSIGNOP;}
+"-="     {return MINUSASSIGNOP;}
+"*="     {return STARASSIGNOP;}
+"/="     {return DIVASSIGNOP;}
+"%="     {return MODASSIGNOP;}
+
+"&&"        {return AND;}
+"||"        {return OR;}
+"!"			{return NOT;}
+"("			{return LP;}
+")"			{return RP;}
+"{"			{return LC;}
+"}"			{return RC;}
+"[" 		{return LB;}
+"]" 		{return RB;}
+[\n]           {yycolumn=1;}   
+[ \r\t]          {}
+\/\/[^\n]*  {}//匹配注释
+.			{printf("Error type A :Mysterious character \"%s\"\n\t at Line %d\n",yytext,yylineno);}
+
 "/*"		{BEGIN(COMMENT);}
 <COMMENT>"*/" {BEGIN(INITIAL);}
 <COMMENT>([^*]|\n)+|.
 %%
 
+/* 和bison联用时，不需要这部分
+void main()
+{
+yylex();
+return 0;
+}
+
+*/
 int yywrap()
 {
-    return 1;
+return 1;
 }

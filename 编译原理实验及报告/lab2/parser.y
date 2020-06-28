@@ -37,7 +37,7 @@ void display(struct ASTNode *,int);
 /*以下为接在上述token后依次编码的枚举常量，作为AST结点类型标记*/
 %token EXT_DEF_LIST EXT_VAR_DEF FUNC_DEF FUNC_DEC EXT_DEC_LIST PARAM_LIST PARAM_DEC VAR_DEF DEC_LIST DEF_LIST COMP_STM STM_LIST EXP_STMT IF_THEN IF_THEN_ELSE
 %token FUNC_CALL ARGS FUNCTION PARAM ARG CALL LABEL GOTO JLT JLE JGT JGE EQ NEQ
-%token FOR FOR_DEC ARRAY_LIST
+%token FOR FOR_DEC ARRAY_LIST ARRAY_CALL
 
 %left ASSIGNOP PLUSASSIGNOP MINUSASSIGNOP STARASSIGNOP DIVASSIGNOP MODASSIGNOP
 %left OR
@@ -56,7 +56,7 @@ void display(struct ASTNode *,int);
 
 %%
 
-program: ExtDefList    { display($1,0);}     //显示语法树,语义分析
+program: ExtDefList    { display($1,0);semantic_Analysis0($1);}     //显示语法树,语义分析
          ;
 ExtDefList: {$$=NULL;}
           | ExtDef ExtDefList {$$=mknode(2,EXT_DEF_LIST,yylineno,$1,$2);}   //每一个EXTDEFLIST的结点，其第1棵子树对应一个外部变量声明或函数
@@ -65,7 +65,7 @@ ExtDef:   Specifier ExtDecList SEMI   {$$=mknode(2,EXT_VAR_DEF,yylineno,$1,$2);}
          |Specifier FuncDec CompSt    {$$=mknode(3,FUNC_DEF,yylineno,$1,$2,$3);}         //该结点对应一个函数定义
          | error SEMI   {$$=NULL;}
          ;
-Specifier:  TYPE    {$$=mknode(0,TYPE,yylineno);strcpy($$->type_id,$1);$$->type=!strcmp($1,"int")?INT:FLOAT;}   
+Specifier:  TYPE    {$$=mknode(0,TYPE,yylineno);strcpy($$->type_id,$1);$$->type=!strcmp($1,"int")?INT:(!strcmp($1,"float")?FLOAT:CHAR);}   
            ;      
 ExtDecList:  VarDec      {$$=$1;}       /*每一个EXT_DECLIST的结点，其第一棵子树对应一个变量名(ID类型的结点),第二棵子树对应剩下的外部变量名*/
            | VarDec COMMA ExtDecList {$$=mknode(2,EXT_DEC_LIST,yylineno,$1,$3);}
@@ -76,7 +76,7 @@ VarDec:  ID          {$$=mknode(0,ID,yylineno);strcpy($$->type_id,$1);}   //ID�
 //数组声明
 Arraylist:  LB INT RB           {$$=mknode(0,ARRAY_LIST,yylineno);$$->type_int=$2;}
             | LB INT RB Arraylist       {$$=mknode(1,ARRAY_LIST,yylineno,$4);$$->type_int=$2;}
-        ;
+			;
 
 //函数定义
 FuncDec: ID LP VarList RP   {$$=mknode(1,FUNC_DEC,yylineno,$3);strcpy($$->type_id,$1);}//函数名存放在$$->type_id
@@ -154,6 +154,7 @@ Exp:    Exp ASSIGNOP Exp {$$=mknode(2,ASSIGNOP,yylineno,$1,$3);strcpy($$->type_i
       | AUTOPLUS Exp  {$$=mknode(1,AUTOPLUS,yylineno,$2);strcpy($$->type_id, "LPAUTOPLUS");}
       | AUTOMINUS Exp {$$=mknode(1,AUTOMINUS,yylineno,$2);strcpy($$->type_id, "LPAUTOMINUS");}
       
+	  | Exp LB Exp RB {$$=mknode(2,ARRAY_CALL,yylineno,$1,$3);}
 	  | LP Exp RP     {$$=$2;} 
       | MINUS Exp %prec UMINUS   {$$=mknode(1,UMINUS,yylineno,$2);strcpy($$->type_id,"UMINUS");}
       | NOT Exp       {$$=mknode(1,NOT,yylineno,$2);strcpy($$->type_id,"NOT");}
