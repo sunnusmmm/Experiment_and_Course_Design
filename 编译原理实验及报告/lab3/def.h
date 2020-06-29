@@ -51,9 +51,6 @@ enum node_kind{
 	BREAK_NODE,
 	BLANK,
 	ARRAY_DF,
-	/*FOR_EXP1,
-	FOR_EXP2,
-	FOR_EXP3,*/
 	FOR_NODE,
 	ARRAY_CALL
 };
@@ -136,20 +133,6 @@ struct symbol_scope_begin {
 	int top;
 } symbol_scope_TX;
 
-struct dead
-{
-	char label[20]; //存储变量名
-	int flag;
-	int nlines;	 //记录出现次数
-	int line[20]; //记录出现位置
-} var[255];	 //变量结构
-
-typedef struct hash{
-	char label[20];  //变量名
-	int val;  //值
-	struct hash * next;
-}hash;
-
 struct ASTNode* mknode(int num, int kind, int pos, ...);
 
 void semantic_Analysis0(struct ASTNode *T);
@@ -178,25 +161,3 @@ struct codenode* genLabel(char* label);
 struct codenode* genGoto(char* label);
 struct codenode* merge(int num, ...);
 void prnIR(struct codenode* head);
-int calArrayNums(struct ASTNode * T);
-int fillArray(struct ASTNode * T, int * array, int index);
-int calArrayWidth(struct ASTNode *T,int *array,int index);
-int calArrayPerWidth(int *array,int index);
-
-int find(char *s);
-void getLiveCode(FILE *f, FILE *g);
-int isBeginWith(const char *str1, char *str2);
-int isSPStatement(char *str);
-int containsLBRB(char * str);
-void deadCode(int l);
-void optimize(int l,hash * head,FILE * f);
-int tokenize(char *str);
-hash * insert(hash * head , char * key ,int val);
-int getValue(hash * head,char * key);
-int optimize_main();
-
-codenode * splitBlock(codenode * head);
-int * findAllGOTOLabel(codenode * head);
-codenode *genBlock(char *label);
-char *newBlock();
-
