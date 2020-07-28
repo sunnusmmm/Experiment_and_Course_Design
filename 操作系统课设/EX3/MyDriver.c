@@ -35,31 +35,17 @@ static int open_process = 0;                //打开设备的进程数，用于�
 //打开设备
 static int mydev_open(struct inode *inode, struct file *filp)
 {
-  // MAJOR和MINOR返回主次设备号
-  printk("mydev: Main device number is %d  \n Slave device number is %d\n", MAJOR(inode->i_rdev), MINOR(inode->i_rdev));
-  printk("mydev: Now device has opend! \n");
-  // 未被占用
-  if (open_process == 0)
-  {
-    open_process++; //标志占用
+	printk("open my_drive OK!\n");
     try_module_get(THIS_MODULE);
     return 0;
-  }
-  // 被占用
-  else
-  {
-    printk(KERN_ALERT "Another process open the char device.\n"); //进程挂起
-    return -1;
-  }
 }
 
 //释放设备
 static int mydev_release(struct inode *inode, struct file *filp)
 {
-  open_process--; //占用解除
-  printk("mydev: The device has released!\n");
-  module_put(THIS_MODULE);
-  return 0;
+	printk("Device released!\n");
+    module_put(THIS_MODULE);
+    return 0;
 }
 
 //读

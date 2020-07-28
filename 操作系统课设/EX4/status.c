@@ -1,6 +1,6 @@
 #include "status.h"
 
-void hello(GtkWidget *widget, gpointer *data)
+void funcation(GtkWidget *widget, gpointer *data)
 {
 	GtkWidget *dialog;
     dialog = gtk_message_dialog_new(NULL,
@@ -22,12 +22,12 @@ void ShowStatus(GtkWidget *vbox)
 	
 	button = gtk_button_new_with_label("Shutdown");
 	g_signal_connect(GTK_OBJECT(button), "clicked",
-        GTK_SIGNAL_FUNC(hello), "button message");
+        GTK_SIGNAL_FUNC(funcation), "button message");
 
     label = gtk_label_new("状态栏");
 	//放置在vbox的下方
-    gtk_box_pack_end(GTK_BOX(vbox), label, FALSE, TRUE, 1);
-	gtk_box_pack_end(GTK_BOX(vbox), button, FALSE, TRUE, 1);
+    gtk_box_pack_end(GTK_BOX(vbox), label, FALSE, TRUE, 2);
+	gtk_box_pack_end(GTK_BOX(vbox), button, FALSE, TRUE, 2);
     //循环调用函数
     g_timeout_add(1000, GetTime, (gpointer)label);
 }
@@ -37,11 +37,11 @@ gint GetTime(gpointer label)
 {   
 //当前时间
     time_t t;
-	struct tm * lt;
+	struct tm * timing;
     char string[150], curtime[25], starttime[25];
     time(&t); //获得系统时间
-	lt = localtime (&t);//转为时间结构。
-    sprintf (curtime, "%d/%d/%d %d:%d:%d",lt->tm_year+1900, lt->tm_mon, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec);//输出结果
+	timing = localtime (&t);//转为时间结构。
+    sprintf (curtime, "%d/%d/%d %d:%d:%d",timing->tm_year+1900, timing->tm_mon, timing->tm_mday, timing->tm_hour, timing->tm_min, timing->tm_sec);//输出结果
 //运行时间
     long int num;
 	int fd;
@@ -59,13 +59,13 @@ gint GetTime(gpointer label)
     int sec = num % 60;
 //开始时间=当前时间-运行时间
 	t = t -  num;
-	lt = localtime (&t);//转为时间结构。
-    sprintf (starttime, "%d/%d/%d %d:%d:%d",lt->tm_year+1900, lt->tm_mon, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec);//输出结果
+	timing = localtime (&t);//转为时间结构。
+    sprintf (starttime, "%d/%d/%d %d:%d:%d",timing->tm_year+1900, timing->tm_mon, timing->tm_mday, timing->tm_hour, timing->tm_min, timing->tm_sec);//输出结果
 	
 //输出状态栏所有信息
     sprintf(string, "当前时间为:%s\t启动时间:%s\t运行时间:%dh %dm %ds\tCPU利用率:%.2f %%\t内存使用:%.2fG / %.2fG",
-            curtime, starttime, hours, mins, sec,stat_info.cpu_ratio, (memo_info.MemTotal - memo_info.MemFree) / 1024.0 /1024.0 ,
-         memo_info.MemTotal / 1024.0 /1024.0);
+            curtime, starttime, hours, mins, sec,stat_info.cpu_ratio, (mem_info.MemTotal - mem_info.MemFree) / 1024.0 /1024.0 ,
+         mem_info.MemTotal / 1024.0 /1024.0);
     gtk_label_set_text(label, string);
 
     return TRUE;

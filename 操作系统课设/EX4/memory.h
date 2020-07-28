@@ -2,16 +2,15 @@
 #define __MEMORY_h__
 
 #include "MainWindow.h"
+#include "cpu.h"
 
-#define LENGTH_M 100
-
-typedef struct memoinfo
+typedef struct memInfo
 {
     long int MemTotal;
     long int MemFree;
+	long int MemAvailable;
     long int Buffers; //缓冲
     long int Cached;  //缓存
-	long int MemAvailable;
     long int Active;
     long int Inactive;
 
@@ -22,16 +21,15 @@ typedef struct memoinfo
 
     float memoredio;
     float swapredio;
-}MEMO_INFO, *p_memoinfo;
+}MEM_INFO, *p_memInfo;
 
-extern MEMO_INFO memo_info;
+extern MEM_INFO mem_info;
 
 void CreateMemory(GtkWidget* notebook);
-long int GetOneMemoInfo(char *name);
-void ShowMemoInfo(GtkWidget *vbox);
+void GetMemInfo();
+void ShowMemInfo(GtkWidget *vbox);
 void ShowSwapInfo(GtkWidget *vbox);
-void GetMemoInfo(void);
-gint UpdateMemo(gpointer data);
+gint UpdateMemInfo(gpointer data);
 
 
 #endif // __MEMORY_h__

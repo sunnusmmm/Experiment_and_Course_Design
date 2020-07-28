@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall
 LDFLAGS = `pkg-config gtk+-2.0 --cflags --libs`
 
-SRCS = MainWindow.c cpu.c memory.c outline.c status.c process.c
+SRCS = MainWindow.c cpu.c memory.c summary.c status.c process.c
 TARGETS = monitor
 
 all:$(TARGETS)

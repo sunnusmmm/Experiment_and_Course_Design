@@ -19,7 +19,7 @@ void CreateProcess(GtkWidget *notebook)
     gtk_container_border_width(GTK_CONTAINER(vbox), 5);
 
     /* 将该标签页加入到notebook中 */
-    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox, gtk_label_new("进程"));
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), vbox, gtk_label_new("进程信息"));
 
     scrolled_window = gtk_scrolled_window_new(NULL, NULL); //添加滚动窗口控件
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
@@ -37,7 +37,6 @@ void CreateProcess(GtkWidget *notebook)
     // 右键弹出菜单连接
     g_signal_connect(G_OBJECT(ptree_view), "button-release-event", G_CALLBACK(PopMenu), NULL);
     // 显示列
-	
     renderer = gtk_cell_renderer_text_new(); //添加一个cell_renderer_text用于显示文字
     column = gtk_tree_view_column_new_with_attributes("PID", renderer, "text", 0, NULL); //新建一列
     gtk_tree_view_append_column(GTK_TREE_VIEW(ptree_view), column);               //将该列加到树中
@@ -210,21 +209,7 @@ gboolean KillProcess(gpointer data)
 
     if (result == GTK_RESPONSE_YES)
     {
-        // 向进程发送SIGTERM信号，正常结束
-		GtkWidget *dialog_more;
-        if (kill(g_pid, SIGTERM) == -1)
-        {
-            // 失败
-			dialog_more = gtk_message_dialog_new(NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "结束进程失败!");
-			gtk_window_set_title(GTK_WINDOW(dialog_more), "Info");
-        }
-        else
-        {
-			dialog_more = gtk_message_dialog_new(NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "结束进程成功!");
-			gtk_window_set_title(GTK_WINDOW(dialog_more), "Error");
-        }
-		gtk_dialog_run(GTK_DIALOG(dialog_more));
-		gtk_widget_destroy(dialog_more);
+		kill(g_pid, SIGTERM);
     }
     gtk_widget_destroy(dialog); //删除对话框
     return TRUE;

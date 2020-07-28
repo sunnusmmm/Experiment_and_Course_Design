@@ -1,7 +1,7 @@
 #include "MainWindow.h"
 #include "cpu.h"
 #include "memory.h"
-#include "outline.h"
+#include "summary.h"
 #include "status.h"
 #include "process.h"
 
@@ -35,22 +35,18 @@ int main(int argc, char **argv)
 	GtkWidget *notebook = gtk_notebook_new();
 	gtk_notebook_set_tab_pos((GtkNotebook *)notebook, GTK_POS_LEFT); //位置放置在左边
 	gtk_notebook_set_show_border((GtkNotebook *)notebook, FALSE);
-	/* 在纵向盒顶部添加该笔记本 */
 	gtk_box_pack_start(GTK_BOX(main_vbox), notebook, TRUE, TRUE, 0);
 
 	// 获取CPU基本信息
 	GetCPUInfo();
 
 	// 添加子页面
-	CreateOutline(notebook);
-	CreateCPU(notebook);
+	CreateSummary(notebook);
 	CreateMemory(notebook);
 	CreateProcess(notebook);
 	ShowStatus(main_vbox);
-
 	gtk_widget_show_all(window);
 
 	gtk_main();
-
 	return 0;
 }

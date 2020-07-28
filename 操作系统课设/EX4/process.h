@@ -4,7 +4,6 @@
 #include "MainWindow.h"
 #include "cpu.h"
 
-#define P_COLUMN 7
 #define MAX_P 300
 
 void CreateProcess(GtkWidget* notebook);
