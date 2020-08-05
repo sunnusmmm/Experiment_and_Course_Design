@@ -91,7 +91,7 @@ void ShowMemInfo(GtkWidget *vbox)
     gtk_misc_set_alignment(GTK_MISC(label1), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox1), label1);
 
-    label = gtk_label_new("(已使用) 总内存");
+    label = gtk_label_new("总内存");
     gtk_misc_set_alignment(GTK_MISC(label), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox2), label);
 
@@ -152,7 +152,7 @@ void ShowSwapInfo(GtkWidget *vbox)
     // 每个表格的布局
     GtkWidget *label;
 
-    label = gtk_label_new("交换分区使用率");
+    label = gtk_label_new("交换分区内存使用率");
     gtk_misc_set_alignment(GTK_MISC(label), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox1), label);
 	
@@ -160,7 +160,7 @@ void ShowSwapInfo(GtkWidget *vbox)
     gtk_misc_set_alignment(GTK_MISC(label7), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox1), label7);
 
-    label = gtk_label_new("(已使用) 总交换分区");
+    label = gtk_label_new("总交换分区内存");
     gtk_misc_set_alignment(GTK_MISC(label), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox2), label);
 
@@ -168,7 +168,7 @@ void ShowSwapInfo(GtkWidget *vbox)
     gtk_misc_set_alignment(GTK_MISC(label8), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox2), label8);
 
-    label = gtk_label_new("可用交换分区");
+    label = gtk_label_new("可用交换分区内存");
     gtk_misc_set_alignment(GTK_MISC(label), 0, 1);
     gtk_container_add(GTK_CONTAINER(vbox3), label);
 
@@ -237,7 +237,7 @@ gint UpdateMemInfo(gpointer data)
     sprintf(string, "%.2f %%", mem_info.memoredio);
     gtk_label_set_text(GTK_LABEL(label1), string);
 
-    sprintf(string, "(%.2fG) %.2fG", (mem_info.MemTotal - mem_info.MemFree) / 1024.0 /1024.0, mem_info.MemTotal / 1024.0 /1024.0);
+    sprintf(string, "%.2fG", mem_info.MemTotal / 1024.0 /1024.0);
     gtk_label_set_text(GTK_LABEL(label2), string);
 
     sprintf(string, "%.2fM", mem_info.MemFree / 1024.0);
@@ -255,8 +255,7 @@ gint UpdateMemInfo(gpointer data)
 	sprintf(string, "%.2f %%", mem_info.swapredio);
     gtk_label_set_text(GTK_LABEL(label7), string);
 
-    sprintf(string, "(%.2fM) %.2fG", (mem_info.SwapTotal - mem_info.SwapFree) / 1024.0 ,
-                     mem_info.SwapTotal / 1024.0 / 1024.0);
+    sprintf(string, "%.2fG", mem_info.SwapTotal / 1024.0 / 1024.0);
     gtk_label_set_text(GTK_LABEL(label8), string);
 
     sprintf(string, "%.2fM", mem_info.SwapFree /1024.0);

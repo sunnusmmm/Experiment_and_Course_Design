@@ -1,5 +1,5 @@
-#ifndef __OUTLINE_h__
-#define __OUTLINE_h__
+#ifndef __SUMMARY_h__
+#define __SUMMARY_h__
 
 #include "MainWindow.h"
 #include "cpu.h"
@@ -18,5 +18,5 @@ void ShowInfo(GtkWidget *vbox, INFO info);
 void showLabel(GtkWidget *vbox, GtkWidget *label, char text[]);
 
 
-#endif // __OUTLINE_h__
+#endif
 

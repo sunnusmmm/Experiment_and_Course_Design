@@ -3,10 +3,7 @@
 void funcation(GtkWidget *widget, gpointer *data)
 {
 	GtkWidget *dialog;
-    dialog = gtk_message_dialog_new(NULL,
-                GTK_DIALOG_DESTROY_WITH_PARENT,
-                GTK_MESSAGE_INFO,
-                GTK_BUTTONS_OK,
+    dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO,
                 "\n确定要关闭计算机吗？\n");
     gtk_window_set_title(GTK_WINDOW(dialog), "Information");
     int k = gtk_dialog_run(GTK_DIALOG(dialog));
